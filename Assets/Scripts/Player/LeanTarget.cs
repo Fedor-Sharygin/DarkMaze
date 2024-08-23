@@ -63,7 +63,7 @@ public class LeanTarget : MonoBehaviour
         }
         else
         {
-            m_CurrentBaseRotation = Mathf.Lerp(m_CurrentBaseRotation, BaseRotation, m_RotationSpeed * Time.fixedDeltaTime);
+            m_CurrentBaseRotation = Mathf.LerpAngle(m_CurrentBaseRotation, BaseRotation, m_RotationSpeed * Time.fixedDeltaTime);
             PrivateTransform.rotation = Quaternion.Euler(0f, 0f, BaseRotation + m_TargetAdditiveRotation);
         }
 
