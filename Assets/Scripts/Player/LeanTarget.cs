@@ -53,6 +53,7 @@ public class LeanTarget : MonoBehaviour
     private float m_RotationSpeed = 5f;
     private void ReachRotation()
     {
+        //MAYBE THERE'S A MORE OPTIMAL WAY TO DO THIS!!!
         if (Mathf.Abs(m_CurrentBaseRotation - BaseRotation) <= .02f)
         {
             if (m_CurrentBaseRotation != BaseRotation)
