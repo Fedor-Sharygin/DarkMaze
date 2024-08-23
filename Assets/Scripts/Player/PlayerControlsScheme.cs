@@ -37,13 +37,22 @@ public partial class @PlayerControlsScheme: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Rotate"",
-                    ""type"": ""PassThrough"",
+                    ""name"": ""Rotate Positive"",
+                    ""type"": ""Button"",
                     ""id"": ""ee79021a-44ca-4fe5-b08b-b267360d8302"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""MultiTap"",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Rotate Negative"",
+                    ""type"": ""Button"",
+                    ""id"": ""353743a3-405e-4f80-9504-2ddf5de4db82"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""MultiTap"",
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""Rotate Mobile"",
@@ -79,7 +88,7 @@ public partial class @PlayerControlsScheme: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""negative"",
                     ""id"": ""1c969bc9-94f3-4f5b-a6f8-3a79846e8319"",
-                    ""path"": ""<Keyboard>/a"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -90,7 +99,7 @@ public partial class @PlayerControlsScheme: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""positive"",
                     ""id"": ""50924f84-0bb9-437a-a83f-bd4050cf8d63"",
-                    ""path"": ""<Keyboard>/d"",
+                    ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -99,37 +108,15 @@ public partial class @PlayerControlsScheme: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""1D Axis"",
-                    ""id"": ""d3e1ffaa-ca2a-4e87-917f-9f4837491d6d"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Rotate"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""be6c4428-1695-433a-ac4c-b1933eece265"",
+                    ""name"": """",
+                    ""id"": ""9c6350ae-34e4-42cd-ba72-22c674e5ce4d"",
                     ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Rotate"",
+                    ""action"": ""Rotate Positive"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""e1b181c1-e0ad-498a-b7b3-9c5ab2f81ee0"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Rotate"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
+                    ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
@@ -161,6 +148,17 @@ public partial class @PlayerControlsScheme: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""88855cea-2034-47b4-81f8-bfebe6152892"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate Negative"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -253,7 +251,8 @@ public partial class @PlayerControlsScheme: IInputActionCollection2, IDisposable
         // Game Controls
         m_GameControls = asset.FindActionMap("Game Controls", throwIfNotFound: true);
         m_GameControls_Lean = m_GameControls.FindAction("Lean", throwIfNotFound: true);
-        m_GameControls_Rotate = m_GameControls.FindAction("Rotate", throwIfNotFound: true);
+        m_GameControls_RotatePositive = m_GameControls.FindAction("Rotate Positive", throwIfNotFound: true);
+        m_GameControls_RotateNegative = m_GameControls.FindAction("Rotate Negative", throwIfNotFound: true);
         m_GameControls_RotateMobile = m_GameControls.FindAction("Rotate Mobile", throwIfNotFound: true);
         m_GameControls_Pause = m_GameControls.FindAction("Pause", throwIfNotFound: true);
         // Menu Controls
@@ -322,7 +321,8 @@ public partial class @PlayerControlsScheme: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_GameControls;
     private List<IGameControlsActions> m_GameControlsActionsCallbackInterfaces = new List<IGameControlsActions>();
     private readonly InputAction m_GameControls_Lean;
-    private readonly InputAction m_GameControls_Rotate;
+    private readonly InputAction m_GameControls_RotatePositive;
+    private readonly InputAction m_GameControls_RotateNegative;
     private readonly InputAction m_GameControls_RotateMobile;
     private readonly InputAction m_GameControls_Pause;
     public struct GameControlsActions
@@ -330,7 +330,8 @@ public partial class @PlayerControlsScheme: IInputActionCollection2, IDisposable
         private @PlayerControlsScheme m_Wrapper;
         public GameControlsActions(@PlayerControlsScheme wrapper) { m_Wrapper = wrapper; }
         public InputAction @Lean => m_Wrapper.m_GameControls_Lean;
-        public InputAction @Rotate => m_Wrapper.m_GameControls_Rotate;
+        public InputAction @RotatePositive => m_Wrapper.m_GameControls_RotatePositive;
+        public InputAction @RotateNegative => m_Wrapper.m_GameControls_RotateNegative;
         public InputAction @RotateMobile => m_Wrapper.m_GameControls_RotateMobile;
         public InputAction @Pause => m_Wrapper.m_GameControls_Pause;
         public InputActionMap Get() { return m_Wrapper.m_GameControls; }
@@ -345,9 +346,12 @@ public partial class @PlayerControlsScheme: IInputActionCollection2, IDisposable
             @Lean.started += instance.OnLean;
             @Lean.performed += instance.OnLean;
             @Lean.canceled += instance.OnLean;
-            @Rotate.started += instance.OnRotate;
-            @Rotate.performed += instance.OnRotate;
-            @Rotate.canceled += instance.OnRotate;
+            @RotatePositive.started += instance.OnRotatePositive;
+            @RotatePositive.performed += instance.OnRotatePositive;
+            @RotatePositive.canceled += instance.OnRotatePositive;
+            @RotateNegative.started += instance.OnRotateNegative;
+            @RotateNegative.performed += instance.OnRotateNegative;
+            @RotateNegative.canceled += instance.OnRotateNegative;
             @RotateMobile.started += instance.OnRotateMobile;
             @RotateMobile.performed += instance.OnRotateMobile;
             @RotateMobile.canceled += instance.OnRotateMobile;
@@ -361,9 +365,12 @@ public partial class @PlayerControlsScheme: IInputActionCollection2, IDisposable
             @Lean.started -= instance.OnLean;
             @Lean.performed -= instance.OnLean;
             @Lean.canceled -= instance.OnLean;
-            @Rotate.started -= instance.OnRotate;
-            @Rotate.performed -= instance.OnRotate;
-            @Rotate.canceled -= instance.OnRotate;
+            @RotatePositive.started -= instance.OnRotatePositive;
+            @RotatePositive.performed -= instance.OnRotatePositive;
+            @RotatePositive.canceled -= instance.OnRotatePositive;
+            @RotateNegative.started -= instance.OnRotateNegative;
+            @RotateNegative.performed -= instance.OnRotateNegative;
+            @RotateNegative.canceled -= instance.OnRotateNegative;
             @RotateMobile.started -= instance.OnRotateMobile;
             @RotateMobile.performed -= instance.OnRotateMobile;
             @RotateMobile.canceled -= instance.OnRotateMobile;
@@ -444,7 +451,8 @@ public partial class @PlayerControlsScheme: IInputActionCollection2, IDisposable
     public interface IGameControlsActions
     {
         void OnLean(InputAction.CallbackContext context);
-        void OnRotate(InputAction.CallbackContext context);
+        void OnRotatePositive(InputAction.CallbackContext context);
+        void OnRotateNegative(InputAction.CallbackContext context);
         void OnRotateMobile(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
     }

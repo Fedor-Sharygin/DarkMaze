@@ -14,6 +14,11 @@ public class LeanTarget : MonoBehaviour
         }
     }
 
+    public void ToNextBaseRotation(int p_Val)
+    {
+        CurrentRotationIdx = (PossibleRotations.Length + CurrentRotationIdx + p_Val) % PossibleRotations.Length;
+    }
+
     private Transform PrivateTransform;
     private void Awake()
     {
@@ -22,6 +27,7 @@ public class LeanTarget : MonoBehaviour
 
     private float m_TargetAdditiveRotation  = 0f;
     private float m_CurrentAdditiveRotation = 0f;
+    private float m_CurrentBaseRotation = 0f;
     /// <summary>
     /// Sets the target rotation for the object to rotate to
     /// </summary>
@@ -47,6 +53,21 @@ public class LeanTarget : MonoBehaviour
     private float m_RotationSpeed = 5f;
     private void ReachRotation()
     {
+        if (Mathf.Abs(m_CurrentBaseRotation - BaseRotation) <= .02f)
+        {
+            if (m_CurrentBaseRotation != BaseRotation)
+            {
+                m_CurrentBaseRotation = BaseRotation;
+                PrivateTransform.rotation = Quaternion.Euler(0f, 0f, BaseRotation + m_TargetAdditiveRotation);
+            }
+        }
+        else
+        {
+            m_CurrentBaseRotation = Mathf.Lerp(m_CurrentBaseRotation, BaseRotation, m_RotationSpeed * Time.fixedDeltaTime);
+            PrivateTransform.rotation = Quaternion.Euler(0f, 0f, BaseRotation + m_TargetAdditiveRotation);
+        }
+
+
         if (Mathf.Abs(m_CurrentAdditiveRotation - m_TargetAdditiveRotation) <= .02f)
         {
             if (m_CurrentAdditiveRotation != m_TargetAdditiveRotation)
@@ -58,7 +79,7 @@ public class LeanTarget : MonoBehaviour
         }
 
         m_CurrentAdditiveRotation = Mathf.Lerp(m_CurrentAdditiveRotation, m_TargetAdditiveRotation, m_RotationSpeed * Time.fixedDeltaTime);
-        PrivateTransform.rotation = Quaternion.Euler(0f, 0f, BaseRotation + m_CurrentAdditiveRotation);
+        PrivateTransform.rotation = Quaternion.Euler(0f, 0f, m_CurrentBaseRotation + m_CurrentAdditiveRotation);
         //Debug.Log($"Current rotation: {m_BeginRotation + m_CurrentAdditiveRotation}");
     }
 }
