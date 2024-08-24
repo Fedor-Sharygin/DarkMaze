@@ -71,6 +71,15 @@ public partial class @PlayerControlsScheme: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""14e0b333-5d4c-4acf-9ecb-93382eb0d9e6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -271,6 +280,50 @@ public partial class @PlayerControlsScheme: IInputActionCollection2, IDisposable
                     ""action"": ""Rotate Negative"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""88598f0f-f40b-4a07-b08a-61171ea51f54"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d9e98b8e-2b60-436e-8adc-c2b07f02c401"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""23e7dbd3-2760-465a-aeb4-05c468cd6680"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d0e6fffc-eed4-4fb9-b3ec-255072906e89"",
+                    ""path"": ""<Touchscreen>/touch*/Press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -365,6 +418,7 @@ public partial class @PlayerControlsScheme: IInputActionCollection2, IDisposable
         m_GameControls_RotateNegative = m_GameControls.FindAction("Rotate Negative", throwIfNotFound: true);
         m_GameControls_RotateMobile = m_GameControls.FindAction("Rotate Mobile", throwIfNotFound: true);
         m_GameControls_Pause = m_GameControls.FindAction("Pause", throwIfNotFound: true);
+        m_GameControls_Jump = m_GameControls.FindAction("Jump", throwIfNotFound: true);
         // Menu Controls
         m_MenuControls = asset.FindActionMap("Menu Controls", throwIfNotFound: true);
         m_MenuControls_Select = m_MenuControls.FindAction("Select", throwIfNotFound: true);
@@ -435,6 +489,7 @@ public partial class @PlayerControlsScheme: IInputActionCollection2, IDisposable
     private readonly InputAction m_GameControls_RotateNegative;
     private readonly InputAction m_GameControls_RotateMobile;
     private readonly InputAction m_GameControls_Pause;
+    private readonly InputAction m_GameControls_Jump;
     public struct GameControlsActions
     {
         private @PlayerControlsScheme m_Wrapper;
@@ -444,6 +499,7 @@ public partial class @PlayerControlsScheme: IInputActionCollection2, IDisposable
         public InputAction @RotateNegative => m_Wrapper.m_GameControls_RotateNegative;
         public InputAction @RotateMobile => m_Wrapper.m_GameControls_RotateMobile;
         public InputAction @Pause => m_Wrapper.m_GameControls_Pause;
+        public InputAction @Jump => m_Wrapper.m_GameControls_Jump;
         public InputActionMap Get() { return m_Wrapper.m_GameControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -468,6 +524,9 @@ public partial class @PlayerControlsScheme: IInputActionCollection2, IDisposable
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
+            @Jump.started += instance.OnJump;
+            @Jump.performed += instance.OnJump;
+            @Jump.canceled += instance.OnJump;
         }
 
         private void UnregisterCallbacks(IGameControlsActions instance)
@@ -487,6 +546,9 @@ public partial class @PlayerControlsScheme: IInputActionCollection2, IDisposable
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
+            @Jump.started -= instance.OnJump;
+            @Jump.performed -= instance.OnJump;
+            @Jump.canceled -= instance.OnJump;
         }
 
         public void RemoveCallbacks(IGameControlsActions instance)
@@ -565,6 +627,7 @@ public partial class @PlayerControlsScheme: IInputActionCollection2, IDisposable
         void OnRotateNegative(InputAction.CallbackContext context);
         void OnRotateMobile(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
     }
     public interface IMenuControlsActions
     {

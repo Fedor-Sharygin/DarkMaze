@@ -28,6 +28,13 @@ public class LeanTarget : MonoBehaviour
     private float m_TargetAdditiveRotation  = 0f;
     private float m_CurrentAdditiveRotation = 0f;
     private float m_CurrentBaseRotation = 0f;
+    public Vector2 UpVector
+    {
+        get
+        {
+            return new Vector3(-Mathf.Sin(m_CurrentAdditiveRotation * Mathf.Deg2Rad), Mathf.Cos(m_CurrentAdditiveRotation * Mathf.Deg2Rad), 0f);
+        }
+    }
     /// <summary>
     /// Sets the target rotation for the object to rotate to
     /// </summary>

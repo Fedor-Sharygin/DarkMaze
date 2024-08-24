@@ -10,6 +10,7 @@ public class PlayerControls : MonoBehaviour
     private InputAction m_LeanLevel;
     private InputAction m_RotatePositiveLevel;
     private InputAction m_RotateNegativeLevel;
+    private InputAction m_JumpAction;
     private void Awake()
     {
         GeneralGameBehavior.Initialize();
@@ -20,6 +21,7 @@ public class PlayerControls : MonoBehaviour
         m_LeanLevel = m_Controls.GameControls.Lean;
         m_RotatePositiveLevel = m_Controls.GameControls.RotatePositive;
         m_RotateNegativeLevel = m_Controls.GameControls.RotateNegative;
+        m_JumpAction = m_Controls.GameControls.Jump;
     }
 
     private void EnableInput()
@@ -38,6 +40,10 @@ public class PlayerControls : MonoBehaviour
         m_RotateNegativeLevel.started += RotateNegativeLevel_Started;
         m_RotateNegativeLevel.performed += RotateNegativeLevel_Performed;
         m_RotateNegativeLevel.canceled += RotateNegativeLevel_Canceled;
+
+
+        m_JumpAction.Enable();
+        m_JumpAction.started += JumpAction_Started;
     }
 
     private void OnEnable()
@@ -93,7 +99,7 @@ public class PlayerControls : MonoBehaviour
 
 
     private bool m_InDoubleTapMode = false;
-    private void RotatePositiveLevel_Started(InputAction.CallbackContext obj)
+    private void RotatePositiveLevel_Started(InputAction.CallbackContext p_CallbackContext)
     {
         m_InDoubleTapMode = true;
     }
@@ -101,20 +107,29 @@ public class PlayerControls : MonoBehaviour
     {
         m_LeanTarget.ToNextBaseRotation(1);
     }
-    private void RotatePositiveLevel_Canceled(InputAction.CallbackContext obj)
+    private void RotatePositiveLevel_Canceled(InputAction.CallbackContext p_CallbackContext)
     {
         m_InDoubleTapMode = false;
     }
-    private void RotateNegativeLevel_Started(InputAction.CallbackContext obj)
+    private void RotateNegativeLevel_Started(InputAction.CallbackContext p_CallbackContext)
     {
         m_InDoubleTapMode = true;
     }
-    private void RotateNegativeLevel_Performed(InputAction.CallbackContext obj)
+    private void RotateNegativeLevel_Performed(InputAction.CallbackContext p_CallbackContext)
     {
         m_LeanTarget.ToNextBaseRotation(-1);
     }
-    private void RotateNegativeLevel_Canceled(InputAction.CallbackContext obj)
+    private void RotateNegativeLevel_Canceled(InputAction.CallbackContext p_CallbackContext)
     {
         m_InDoubleTapMode = false;
+    }
+
+
+
+    [SerializeField]
+    private JumpTarget m_JumpTarget;
+    private void JumpAction_Started(InputAction.CallbackContext p_CallbackContext)
+    {
+        m_JumpTarget?.Jump();
     }
 }

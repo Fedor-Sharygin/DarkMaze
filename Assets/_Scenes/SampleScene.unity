@@ -472,6 +472,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_LeanTarget: {fileID: 1304340635}
   m_RotationValue: 20
+  m_JumpTarget: {fileID: 928791879}
 --- !u!4 &815070214
 Transform:
   m_ObjectHideFlags: 0
@@ -529,6 +530,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 928791875}
+  - component: {fileID: 928791879}
   - component: {fileID: 928791878}
   - component: {fileID: 928791877}
   - component: {fileID: 928791876}
@@ -653,6 +655,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &928791879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 928791874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecf1d819e5c5b54a840cadcc4ca178b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CoyoteTimer: {fileID: 0}
+  m_JumpForce: 5
+  m_SpaceHolder: {fileID: 1304340635}
 --- !u!1 &1112624849
 GameObject:
   m_ObjectHideFlags: 0
