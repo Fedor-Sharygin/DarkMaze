@@ -77,8 +77,6 @@ public class PlayerControls : MonoBehaviour
 
 
     [SerializeField]
-    private LeanTarget m_LeanTarget;
-    [SerializeField]
     private float m_RotationValue = 20f;
     private void LeanLevel_Started(InputAction.CallbackContext p_CallbackContext)
     {
@@ -86,13 +84,13 @@ public class PlayerControls : MonoBehaviour
         int LeanDir = (FLeanDir > 0f ? 1 : (FLeanDir < 0f ? -1 : 0));
         if (m_InDoubleTapMode)
         {
-            m_LeanTarget.ToNextBaseRotation(LeanDir);
+            LeanTarget.CurrentObj.ToNextBaseRotation(LeanDir);
         }
-        m_LeanTarget.SetTargetRotation(LeanDir * m_RotationValue);
+        LeanTarget.CurrentObj.SetTargetRotation(LeanDir * m_RotationValue);
     }
     private void LeanLevel_Canceled(InputAction.CallbackContext p_CallbackContext)
     {
-        m_LeanTarget.ResetRotation();
+        LeanTarget.CurrentObj.ResetRotation();
     }
 
 
@@ -105,7 +103,7 @@ public class PlayerControls : MonoBehaviour
     }
     private void RotatePositiveLevel_Performed(InputAction.CallbackContext p_CallbackContext)
     {
-        m_LeanTarget.ToNextBaseRotation(1);
+        LeanTarget.CurrentObj.ToNextBaseRotation(1);
     }
     private void RotatePositiveLevel_Canceled(InputAction.CallbackContext p_CallbackContext)
     {
@@ -117,7 +115,7 @@ public class PlayerControls : MonoBehaviour
     }
     private void RotateNegativeLevel_Performed(InputAction.CallbackContext p_CallbackContext)
     {
-        m_LeanTarget.ToNextBaseRotation(-1);
+        LeanTarget.CurrentObj.ToNextBaseRotation(-1);
     }
     private void RotateNegativeLevel_Canceled(InputAction.CallbackContext p_CallbackContext)
     {

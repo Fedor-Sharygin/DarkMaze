@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class LeanTarget : MonoBehaviour
 {
+    public static LeanTarget CurrentObj;
+
     private float[] PossibleRotations = new float[] { 0f, 90f, 180f, 270f };
     private int CurrentRotationIdx = 0;
     private float BaseRotation
@@ -17,11 +19,15 @@ public class LeanTarget : MonoBehaviour
     public void ToNextBaseRotation(int p_Val)
     {
         CurrentRotationIdx = (PossibleRotations.Length + CurrentRotationIdx + p_Val) % PossibleRotations.Length;
+
+        var GlobalUpVector = new Vector3(-Mathf.Sin(BaseRotation * Mathf.Deg2Rad), Mathf.Cos(BaseRotation * Mathf.Deg2Rad), 0f);
+        GroundedCheck.CurrentObj.transform.localEulerAngles = new Vector3(0f, 0f, -BaseRotation);
     }
 
     private Transform PrivateTransform;
     private void Awake()
     {
+        CurrentObj = this;
         PrivateTransform = transform; //to avoid unnecessary calls to external code
     }
 

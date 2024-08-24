@@ -15,13 +15,23 @@ public class JumpTarget : MonoBehaviour
 
     [SerializeField]
     private float m_JumpForce = 20f;
-    private bool m_Jumping = false;
 
-    [SerializeField]
-    private LeanTarget m_SpaceHolder;
+    private bool CanJump
+    {
+        get
+        {
+            return GroundedCheck.CurrentObj.Grounded || m_CoyoteTimer.IsPlaying();
+        }
+    }
 
     public void Jump()
     {
-        PrivateRigidBody.velocity += m_JumpForce * m_SpaceHolder.UpVector;
+        if (!CanJump)
+        {
+            return;
+        }
+
+        GroundedCheck.CurrentObj.DisableJump();
+        PrivateRigidBody.velocity += m_JumpForce * LeanTarget.CurrentObj.UpVector;
     }
 }
