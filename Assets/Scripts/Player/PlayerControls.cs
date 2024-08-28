@@ -24,13 +24,8 @@ public class PlayerControls : MonoBehaviour
         m_JumpAction = m_Controls.GameControls.Jump;
     }
 
-    private void EnableInput()
+    public void EnableRotationInput()
     {
-        m_LeanLevel.Enable();
-        m_LeanLevel.started += LeanLevel_Started;
-        m_LeanLevel.canceled += LeanLevel_Canceled;
-
-
         m_RotatePositiveLevel.Enable();
         m_RotatePositiveLevel.started += RotatePositiveLevel_Started;
         m_RotatePositiveLevel.performed += RotatePositiveLevel_Performed;
@@ -40,31 +35,47 @@ public class PlayerControls : MonoBehaviour
         m_RotateNegativeLevel.started += RotateNegativeLevel_Started;
         m_RotateNegativeLevel.performed += RotateNegativeLevel_Performed;
         m_RotateNegativeLevel.canceled += RotateNegativeLevel_Canceled;
+    }
+    public void EnableInput()
+    {
+        m_LeanLevel.Enable();
+        m_LeanLevel.started += LeanLevel_Started;
+        m_LeanLevel.canceled += LeanLevel_Canceled;
 
+        EnableRotationInput();
 
         m_JumpAction.Enable();
         m_JumpAction.started += JumpAction_Started;
     }
-
     private void OnEnable()
     {
         EnableInput();
     }
 
-    private void DisableInput()
+
+    public void DisableRotationInput()
+    {
+        m_RotatePositiveLevel.started -= RotatePositiveLevel_Started;
+        m_RotatePositiveLevel.performed -= RotatePositiveLevel_Performed;
+        m_RotatePositiveLevel.canceled -= RotatePositiveLevel_Canceled;
+        m_RotatePositiveLevel.Disable();
+
+        m_RotateNegativeLevel.started -= RotateNegativeLevel_Started;
+        m_RotateNegativeLevel.performed -= RotateNegativeLevel_Performed;
+        m_RotateNegativeLevel.canceled -= RotateNegativeLevel_Canceled;
+        m_RotateNegativeLevel.Disable();
+    }
+    public void DisableInput()
     {
         m_LeanLevel.started -= LeanLevel_Started;
         m_LeanLevel.canceled -= LeanLevel_Canceled;
         m_LeanLevel.Disable();
 
+        DisableRotationInput();
 
-        m_RotatePositiveLevel.performed -= RotatePositiveLevel_Performed;
-        m_RotatePositiveLevel.Disable();
-
-        m_RotateNegativeLevel.performed -= RotateNegativeLevel_Performed;
-        m_RotateNegativeLevel.Disable();
+        m_JumpAction.started -= JumpAction_Started;
+        m_JumpAction.Disable();
     }
-
     private void OnDisable()
     {
         DisableInput();
@@ -85,6 +96,7 @@ public class PlayerControls : MonoBehaviour
         if (m_InDoubleTapMode)
         {
             LeanTarget.CurrentObj.ToNextBaseRotation(LeanDir);
+            m_InDoubleTapMode = false;
         }
         LeanTarget.CurrentObj.SetTargetRotation(LeanDir * m_RotationValue);
     }
@@ -96,6 +108,8 @@ public class PlayerControls : MonoBehaviour
 
 
 
+    [SerializeField]
+    private Timer m_RotationAvailabilityResetTimer;
     private bool m_InDoubleTapMode = false;
     private void RotatePositiveLevel_Started(InputAction.CallbackContext p_CallbackContext)
     {
@@ -103,11 +117,20 @@ public class PlayerControls : MonoBehaviour
     }
     private void RotatePositiveLevel_Performed(InputAction.CallbackContext p_CallbackContext)
     {
-        LeanTarget.CurrentObj.ToNextBaseRotation(1);
+        //DisableRotationInput();
+        //m_RotationAvailabilityResetTimer?.ResetTimer();
+        //m_RotationAvailabilityResetTimer?.Play();
+
+        //LeanTarget.CurrentObj.ToNextBaseRotation(1);
+        //m_InDoubleTapMode = false;
     }
     private void RotatePositiveLevel_Canceled(InputAction.CallbackContext p_CallbackContext)
     {
         m_InDoubleTapMode = false;
+
+        //DisableRotationInput();
+        //m_RotationAvailabilityResetTimer?.ResetTimer();
+        //m_RotationAvailabilityResetTimer?.Play();
     }
     private void RotateNegativeLevel_Started(InputAction.CallbackContext p_CallbackContext)
     {
@@ -115,11 +138,20 @@ public class PlayerControls : MonoBehaviour
     }
     private void RotateNegativeLevel_Performed(InputAction.CallbackContext p_CallbackContext)
     {
-        LeanTarget.CurrentObj.ToNextBaseRotation(-1);
+        //DisableRotationInput();
+        //m_RotationAvailabilityResetTimer?.ResetTimer();
+        //m_RotationAvailabilityResetTimer?.Play();
+
+        //LeanTarget.CurrentObj.ToNextBaseRotation(-1);
+        //m_InDoubleTapMode = false;
     }
     private void RotateNegativeLevel_Canceled(InputAction.CallbackContext p_CallbackContext)
     {
         m_InDoubleTapMode = false;
+
+        //DisableRotationInput();
+        //m_RotationAvailabilityResetTimer?.ResetTimer();
+        //m_RotationAvailabilityResetTimer?.Play();
     }
 
 

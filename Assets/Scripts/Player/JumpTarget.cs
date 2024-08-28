@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class JumpTarget : MonoBehaviour
 {
+    private Transform PrivateTransform;
     private Rigidbody2D PrivateRigidBody;
     private void Awake()
     {
-        PrivateRigidBody = GetComponent<Rigidbody2D>(); ; //to avoid unnecessary calls to external code
+        PrivateTransform = transform;   //to avoid unnecessary calls to external code
+        PrivateRigidBody = GetComponent<Rigidbody2D>(); //to avoid unnecessary calls
     }
 
     [SerializeField]
@@ -16,11 +18,14 @@ public class JumpTarget : MonoBehaviour
     [SerializeField]
     private float m_JumpForce = 20f;
 
+    [SerializeField]
+    private GroundedCheck m_GroundedCheck;
+
     private bool CanJump
     {
         get
         {
-            return GroundedCheck.CurrentObj.Grounded || m_CoyoteTimer.IsPlaying();
+            return m_GroundedCheck.Grounded || m_CoyoteTimer.IsPlaying();
         }
     }
 
@@ -31,7 +36,48 @@ public class JumpTarget : MonoBehaviour
             return;
         }
 
-        GroundedCheck.CurrentObj.DisableJump();
+        m_GroundedCheck.DisableJump();
         PrivateRigidBody.velocity += m_JumpForce * LeanTarget.CurrentObj.UpVector;
+    }
+
+
+    [Space(10)]
+    [SerializeField]
+    private Transform m_SpawnPoint;
+    [SerializeField]
+    private float m_ResetSpeed = 5f;
+    private bool m_ResettingPosition = false;
+    private void FixedUpdate()
+    {
+        if (!m_ResettingPosition)
+        {
+            return;
+        }
+
+        if (Vector3.Distance(PrivateTransform.localPosition, m_SpawnPoint.localPosition) <= .5f)
+        {
+            PrivateTransform.localPosition = m_SpawnPoint.localPosition;
+            m_ResettingPosition = false;
+            return;
+        }
+
+        PrivateTransform.localPosition = Vector3.Lerp(PrivateTransform.localPosition, m_SpawnPoint.localPosition, m_ResetSpeed * Time.fixedDeltaTime);
+    }
+
+    public void ResetPositionState()
+    {
+        m_ResettingPosition = true;
+    }
+    public void ResetVelocity()
+    {
+        PrivateRigidBody.velocity = Vector3.zero;
+    }
+    public void DisableGravity()
+    {
+        PrivateRigidBody.gravityScale = 0f;
+    }
+    public void EnableGravity()
+    {
+        PrivateRigidBody.gravityScale = 1f;
     }
 }

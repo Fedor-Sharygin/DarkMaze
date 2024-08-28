@@ -20,8 +20,19 @@ public class LeanTarget : MonoBehaviour
     {
         CurrentRotationIdx = (PossibleRotations.Length + CurrentRotationIdx + p_Val) % PossibleRotations.Length;
 
-        var GlobalUpVector = new Vector3(-Mathf.Sin(BaseRotation * Mathf.Deg2Rad), Mathf.Cos(BaseRotation * Mathf.Deg2Rad), 0f);
-        GroundedCheck.CurrentObj.transform.localEulerAngles = new Vector3(0f, 0f, -BaseRotation);
+        foreach (var OTG in BottomObject.ObjectsToGround)
+        {
+            OTG.transform.localEulerAngles = new Vector3(0f, 0f, -BaseRotation);
+        }
+    }
+    public void ResetBaseRotation()
+    {
+        CurrentRotationIdx = 0;
+
+        foreach (var OTG in BottomObject.ObjectsToGround)
+        {
+            OTG.transform.localEulerAngles = Vector3.zero;
+        }
     }
 
     private Transform PrivateTransform;

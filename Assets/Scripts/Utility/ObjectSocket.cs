@@ -31,8 +31,8 @@ public class ObjectSocket : MonoBehaviour
     public bool m_DestroyObjects;
 
     [SerializeField]
-    private float m_ObjectSpeed = 0.02f;
-    private void Update()
+    private float m_ObjectSpeed = 5f;
+    private void FixedUpdate()
     {
         if (AvailableForStack)
         {
@@ -49,10 +49,10 @@ public class ObjectSocket : MonoBehaviour
                 }
                 continue;
             }
-            transform.GetChild(i).localPosition = Vector3.Lerp(transform.GetChild(i).localPosition, Vector3.zero, m_ObjectSpeed);
+            transform.GetChild(i).localPosition = Vector3.Lerp(transform.GetChild(i).localPosition, Vector3.zero, m_ObjectSpeed * Time.fixedDeltaTime);
             if (m_DestroyObjects)
             {
-                transform.GetChild(i).localScale = Vector3.Lerp(transform.GetChild(i).localScale, Vector3.zero, m_ObjectSpeed);
+                transform.GetChild(i).localScale = Vector3.Lerp(transform.GetChild(i).localScale, Vector3.zero, m_ObjectSpeed * Time.fixedDeltaTime);
             }
         }
     }

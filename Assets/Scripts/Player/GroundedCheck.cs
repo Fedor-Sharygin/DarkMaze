@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class GroundedCheck : MonoBehaviour
 {
-    public static GroundedCheck CurrentObj;
-    private void Awake()
-    {
-        CurrentObj = this;
-    }
-
     private bool m_Grounded = false;
     public bool Grounded
     {
@@ -25,6 +19,7 @@ public class GroundedCheck : MonoBehaviour
     {
         m_ActionJump = false;
         m_CoyoteTimer.ResetTimer();
+        m_CoyoteTimer.Stop();
         m_Grounded = true;
     }
     private void OnTriggerExit2D(Collider2D p_Other)
