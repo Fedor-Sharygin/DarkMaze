@@ -107,9 +107,6 @@ public class PlayerControls : MonoBehaviour
 
 
 
-
-    [SerializeField]
-    private Timer m_RotationAvailabilityResetTimer;
     private bool m_InDoubleTapMode = false;
     private void RotatePositiveLevel_Started(InputAction.CallbackContext p_CallbackContext)
     {
@@ -117,20 +114,10 @@ public class PlayerControls : MonoBehaviour
     }
     private void RotatePositiveLevel_Performed(InputAction.CallbackContext p_CallbackContext)
     {
-        //DisableRotationInput();
-        //m_RotationAvailabilityResetTimer?.ResetTimer();
-        //m_RotationAvailabilityResetTimer?.Play();
-
-        //LeanTarget.CurrentObj.ToNextBaseRotation(1);
-        //m_InDoubleTapMode = false;
     }
     private void RotatePositiveLevel_Canceled(InputAction.CallbackContext p_CallbackContext)
     {
         m_InDoubleTapMode = false;
-
-        //DisableRotationInput();
-        //m_RotationAvailabilityResetTimer?.ResetTimer();
-        //m_RotationAvailabilityResetTimer?.Play();
     }
     private void RotateNegativeLevel_Started(InputAction.CallbackContext p_CallbackContext)
     {
@@ -138,20 +125,10 @@ public class PlayerControls : MonoBehaviour
     }
     private void RotateNegativeLevel_Performed(InputAction.CallbackContext p_CallbackContext)
     {
-        //DisableRotationInput();
-        //m_RotationAvailabilityResetTimer?.ResetTimer();
-        //m_RotationAvailabilityResetTimer?.Play();
-
-        //LeanTarget.CurrentObj.ToNextBaseRotation(-1);
-        //m_InDoubleTapMode = false;
     }
     private void RotateNegativeLevel_Canceled(InputAction.CallbackContext p_CallbackContext)
     {
         m_InDoubleTapMode = false;
-
-        //DisableRotationInput();
-        //m_RotationAvailabilityResetTimer?.ResetTimer();
-        //m_RotationAvailabilityResetTimer?.Play();
     }
 
 

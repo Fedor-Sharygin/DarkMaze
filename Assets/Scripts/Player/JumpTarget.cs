@@ -41,33 +41,33 @@ public class JumpTarget : MonoBehaviour
     }
 
 
-    [Space(10)]
-    [SerializeField]
-    private Transform m_SpawnPoint;
-    [SerializeField]
-    private float m_ResetSpeed = 5f;
-    private bool m_ResettingPosition = false;
-    private void FixedUpdate()
-    {
-        if (!m_ResettingPosition)
-        {
-            return;
-        }
+    //[Space(10)]
+    //[SerializeField]
+    //private Transform m_SpawnPoint;
+    //[SerializeField]
+    //private float m_ResetSpeed = 5f;
+    //private bool m_ResettingPosition = false;
+    //private void FixedUpdate()
+    //{
+    //    if (!m_ResettingPosition)
+    //    {
+    //        return;
+    //    }
 
-        if (Vector3.Distance(PrivateTransform.localPosition, m_SpawnPoint.localPosition) <= .5f)
-        {
-            PrivateTransform.localPosition = m_SpawnPoint.localPosition;
-            m_ResettingPosition = false;
-            return;
-        }
+    //    if (Vector3.Distance(PrivateTransform.localPosition, m_SpawnPoint.localPosition) <= .5f)
+    //    {
+    //        PrivateTransform.localPosition = m_SpawnPoint.localPosition;
+    //        m_ResettingPosition = false;
+    //        return;
+    //    }
 
-        PrivateTransform.localPosition = Vector3.Lerp(PrivateTransform.localPosition, m_SpawnPoint.localPosition, m_ResetSpeed * Time.fixedDeltaTime);
-    }
+    //    PrivateTransform.localPosition = Vector3.Lerp(PrivateTransform.localPosition, m_SpawnPoint.localPosition, m_ResetSpeed * Time.fixedDeltaTime);
+    //}
 
-    public void ResetPositionState()
-    {
-        m_ResettingPosition = true;
-    }
+    //public void ResetPositionState()
+    //{
+    //    m_ResettingPosition = true;
+    //}
     public void ResetVelocity()
     {
         PrivateRigidBody.velocity = Vector3.zero;

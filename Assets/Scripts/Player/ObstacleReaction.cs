@@ -19,7 +19,8 @@ public class ObstacleReaction : MonoBehaviour
 
 
         public string m_TagName;
-        public UnityEvent m_Action;
+        public UnityEvent m_EnterAction;
+        public UnityEvent m_ExitAction;
 
         public bool IsEmpty()
         {
@@ -59,6 +60,16 @@ public class ObstacleReaction : MonoBehaviour
             return;
         }
 
-        ExpectedReaction.m_Action?.Invoke();
+        ExpectedReaction.m_EnterAction?.Invoke();
+    }
+    private void OnTriggerExit2D(Collider2D p_Other)
+    {
+        var ExpectedReaction = GetObstacleActionByTag(p_Other.tag);
+        if (ExpectedReaction.IsEmpty())
+        {
+            return;
+        }
+
+        ExpectedReaction.m_ExitAction?.Invoke();
     }
 }
