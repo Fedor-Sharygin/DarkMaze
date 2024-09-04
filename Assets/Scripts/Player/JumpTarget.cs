@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class JumpTarget : MonoBehaviour
 {
+    public static JumpTarget CurrentObj;
+
     private Transform PrivateTransform;
     private Rigidbody2D PrivateRigidBody;
     private void Awake()
     {
         PrivateTransform = transform;   //to avoid unnecessary calls to external code
         PrivateRigidBody = GetComponent<Rigidbody2D>(); //to avoid unnecessary calls
+
+        CurrentObj = this;
     }
 
     [SerializeField]

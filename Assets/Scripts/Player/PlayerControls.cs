@@ -133,10 +133,8 @@ public class PlayerControls : MonoBehaviour
 
 
 
-    [SerializeField]
-    private JumpTarget m_JumpTarget;
     private void JumpAction_Started(InputAction.CallbackContext p_CallbackContext)
     {
-        m_JumpTarget?.Jump();
+        JumpTarget.CurrentObj?.Jump();
     }
 }
