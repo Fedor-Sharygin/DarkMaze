@@ -93,16 +93,22 @@ public class PlayerControls : MonoBehaviour
     {
         float FLeanDir = m_LeanLevel.ReadValue<float>();
         int LeanDir = (FLeanDir > 0f ? 1 : (FLeanDir < 0f ? -1 : 0));
-        if (m_InDoubleTapMode)
+        foreach (var LT in LeanTarget.CurrentObjs)
         {
-            LeanTarget.CurrentObj.ToNextBaseRotation(LeanDir);
-            m_InDoubleTapMode = false;
+            if (m_InDoubleTapMode)
+            {
+                LT.ToNextBaseRotation(LeanDir);
+            }
+            LT.SetTargetRotation(LeanDir * m_RotationValue);
         }
-        LeanTarget.CurrentObj.SetTargetRotation(LeanDir * m_RotationValue);
+        m_InDoubleTapMode = false;
     }
     private void LeanLevel_Canceled(InputAction.CallbackContext p_CallbackContext)
     {
-        LeanTarget.CurrentObj.ResetRotation();
+        foreach (var LT in LeanTarget.CurrentObjs)
+        {
+            LT.ResetRotation();
+        }
     }
 
 

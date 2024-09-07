@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class LeanTarget : MonoBehaviour
 {
-    public static LeanTarget CurrentObj;
+    public static List<LeanTarget> CurrentObjs = new List<LeanTarget>();
+    public static Vector2 CommonUpVector
+    {
+        get
+        {
+            return CurrentObjs[0].UpVector;
+        }
+    }
 
     private float[] PossibleRotations = new float[] { 0f, 90f, 180f, 270f };
     private int CurrentRotationIdx = 0;
@@ -38,8 +45,12 @@ public class LeanTarget : MonoBehaviour
     private Transform PrivateTransform;
     private void Awake()
     {
-        CurrentObj = this;
+        CurrentObjs.Add(this);
         PrivateTransform = transform; //to avoid unnecessary calls to external code
+    }
+    private void OnDestroy()
+    {
+        CurrentObjs.Remove(this);
     }
 
     private float m_TargetAdditiveRotation  = 0f;

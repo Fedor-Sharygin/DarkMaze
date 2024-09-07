@@ -41,7 +41,7 @@ public class JumpTarget : MonoBehaviour
         }
 
         m_GroundedCheck.DisableJump();
-        PrivateRigidBody.velocity += m_JumpForce * LeanTarget.CurrentObj.UpVector;
+        PrivateRigidBody.velocity += m_JumpForce * LeanTarget.CommonUpVector;
     }
 
 
