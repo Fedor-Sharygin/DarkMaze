@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Spikes
   - Target
+  - MainLevelParent
+  - PlayerSpawnPoint
   layers:
   - Default
   - TransparentFX

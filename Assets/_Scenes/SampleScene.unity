@@ -300,7 +300,7 @@ GameObject:
   - component: {fileID: 497254124}
   m_Layer: 0
   m_Name: PlayerSpawnPoint
-  m_TagString: Untagged
+  m_TagString: PlayerSpawnPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -317,8 +317,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1547481981}
-  m_RootOrder: 2
+  m_Father: {fileID: 1304340634}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &497254124
 MonoBehaviour:
@@ -1098,7 +1098,7 @@ GameObject:
   - component: {fileID: 1304340636}
   m_Layer: 0
   m_Name: ControlledObject
-  m_TagString: Untagged
+  m_TagString: MainLevelParent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1115,6 +1115,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 497254123}
   - {fileID: 1024457097381103225}
   - {fileID: 4639503543188430427}
   m_Father: {fileID: 0}
@@ -1498,7 +1499,6 @@ Transform:
   m_Children:
   - {fileID: 1318125138}
   - {fileID: 66253749}
-  - {fileID: 497254123}
   m_Father: {fileID: 1904666384}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1962,7 +1962,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1304340634}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1323447439961981409
 GameObject:
@@ -2340,7 +2340,7 @@ Transform:
   - {fileID: 1710645033}
   - {fileID: 506281617}
   m_Father: {fileID: 1304340634}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4833538158641423899
 GameObject:

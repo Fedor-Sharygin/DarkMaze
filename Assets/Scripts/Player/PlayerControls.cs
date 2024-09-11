@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerControls : MonoBehaviour
 {
+    public static GameObject m_TestObject;
+
     private PlayerControlsScheme m_Controls;
     private InputAction m_LeanLevel;
     private InputAction m_RotatePositiveLevel;
