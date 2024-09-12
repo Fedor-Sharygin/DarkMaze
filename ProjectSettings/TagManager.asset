@@ -8,6 +8,7 @@ TagManager:
   - Target
   - MainLevelParent
   - PlayerSpawnPoint
+  - OuterBorderHolder
   layers:
   - Default
   - TransparentFX

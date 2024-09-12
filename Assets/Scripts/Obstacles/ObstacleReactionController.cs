@@ -14,16 +14,27 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class ObstacleReactionController : MonoBehaviour
 {
+    //private void OnDestroy()
+    //{
+    //    Debug.LogWarning($"HUH!HUHHSDIHNL?>?!");
+    //}
+    //private void OnDisable()
+    //{
+    //    Debug.LogWarning($"HUH!HUHHSDIHNL?>?!");
+    //}
+
     public static ObstacleReactionController CurrentObj;
 
     //private Transform m_MainLevelParent;
     private ObjectSocket m_SpawnPointSocket;
-    private void Awake()
+    private OuterBorderSocketManager m_OBSM;
+    private void Start()
     {
         CurrentObj = this;
 
         //m_MainLevelParent = GameObject.FindGameObjectWithTag($"MainLevelParent").transform;
         m_SpawnPointSocket = GameObject.FindGameObjectWithTag($"PlayerSpawnPoint").GetComponent<ObjectSocket>();
+        m_OBSM = GameObject.FindGameObjectWithTag($"OuterBorderHolder").GetComponent<OuterBorderSocketManager>();
 
         SceneManager.sceneLoaded += SceneLoaded;
     }
@@ -43,13 +54,28 @@ public class ObstacleReactionController : MonoBehaviour
         var SPS_Objects = GameObject.FindGameObjectsWithTag($"PlayerSpawnPoint");
         foreach (var SPS_Obj in SPS_Objects)
         {
-            if (SPS_Obj.scene != p_Scene)
+            if (SPS_Obj.scene == m_SpawnPointSocket.gameObject.scene)
             {
                 continue;
             }
             m_SpawnPointSocket = SPS_Obj.GetComponent<ObjectSocket>();
             break;
         }
+
+        var OBSM_Objects = GameObject.FindGameObjectsWithTag($"OuterBorderHolder");
+        foreach(var OBSM_Obj in OBSM_Objects)
+        {
+            if (OBSM_Obj.scene == m_OBSM.gameObject.scene)
+            {
+                continue;
+            }
+            m_OBSM = OBSM_Obj.GetComponent<OuterBorderSocketManager>();
+            break;
+        }
+
+        //NEWLY LOADED SCENE MEANS THAT THE LEVEL CHANGED
+        //PLACE THE PLAYER ON THE NEW SPAWN POINT
+        PlacePlayerOnSpawn();
     }
 
 
@@ -105,5 +131,12 @@ public class ObstacleReactionController : MonoBehaviour
         }
         m_SpawnPointSocket.RemoveObj().parent = m_PlayerParentTransform;
         //m_PlayerReactiveComponents.m_PlayerTransform.parent = m_PlayerParentTransform;
+    }
+
+
+    public void LoadNextLevel_Complete()
+    {
+        m_OBSM.RemoveBorders();
+        SceneLoader.LoadNextLevel();
     }
 }
