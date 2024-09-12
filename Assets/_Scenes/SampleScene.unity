@@ -335,7 +335,31 @@ MonoBehaviour:
   m_DestroyObjects: 0
   m_EventOnArrival:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1304340636}
+        m_TargetAssemblyTypeName: Timer, Assembly-CSharp
+        m_MethodName: ResetTimer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1304340636}
+        m_TargetAssemblyTypeName: Timer, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_ObjectSpeed: 5
 --- !u!1 &506281616
 GameObject:
@@ -885,11 +909,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!4 &928791875 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8898221577572880965, guid: 707d5643da95d0943b3a016a7e7b844d, type: 3}
-  m_PrefabInstance: {fileID: 3212574030809703744}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &928791879 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8898221577572880961, guid: 707d5643da95d0943b3a016a7e7b844d, type: 3}
@@ -1074,16 +1093,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &1161262742 stripped
-CircleCollider2D:
-  m_CorrespondingSourceObject: {fileID: 8898221578247517231, guid: 707d5643da95d0943b3a016a7e7b844d, type: 3}
-  m_PrefabInstance: {fileID: 3212574030809703744}
-  m_PrefabAsset: {fileID: 0}
---- !u!61 &1290784302 stripped
-BoxCollider2D:
-  m_CorrespondingSourceObject: {fileID: 8898221577572880972, guid: 707d5643da95d0943b3a016a7e7b844d, type: 3}
-  m_PrefabInstance: {fileID: 3212574030809703744}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1304340632
 GameObject:
   m_ObjectHideFlags: 0
@@ -1096,9 +1105,10 @@ GameObject:
   - component: {fileID: 1304340635}
   - component: {fileID: 3868072926296793681}
   - component: {fileID: 1304340636}
+  - component: {fileID: 3868072926296793682}
   m_Layer: 0
   m_Name: ControlledObject
-  m_TagString: MainLevelParent
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1157,21 +1167,9 @@ MonoBehaviour:
   m_EndActions:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1290784302}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 928791879}
-        m_TargetAssemblyTypeName: JumpTarget, Assembly-CSharp
-        m_MethodName: EnableGravity
+      - m_Target: {fileID: 3868072926296793682}
+        m_TargetAssemblyTypeName: ORC_User, Assembly-CSharp
+        m_MethodName: PlacePlayerInLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1179,43 +1177,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 1161262742}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 3212574030809703745}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 928791875}
-        m_TargetAssemblyTypeName: UnityEngine.Transform, UnityEngine
-        m_MethodName: set_parent
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 1304340634}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &1318125137
 GameObject:
@@ -2186,11 +2148,6 @@ PrefabInstance:
       objectReference: {fileID: 497254124}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 707d5643da95d0943b3a016a7e7b844d, type: 3}
---- !u!1 &3212574030809703745 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3212574030550423876, guid: 707d5643da95d0943b3a016a7e7b844d, type: 3}
-  m_PrefabInstance: {fileID: 3212574030809703744}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &3591214611294904410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2212,21 +2169,9 @@ MonoBehaviour:
   m_BorderEntryEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1290784302}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 928791879}
-        m_TargetAssemblyTypeName: JumpTarget, Assembly-CSharp
-        m_MethodName: EnableGravity
+      - m_Target: {fileID: 3868072926296793682}
+        m_TargetAssemblyTypeName: ORC_User, Assembly-CSharp
+        m_MethodName: PlacePlayerInLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2271,6 +2216,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &3868072926296793682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1304340632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f907d71f34a106d43805a1bc58e8c756, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &4151578373443608074
 SpriteRenderer:
   m_ObjectHideFlags: 0

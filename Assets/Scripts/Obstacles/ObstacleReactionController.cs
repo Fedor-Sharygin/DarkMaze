@@ -14,27 +14,31 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class ObstacleReactionController : MonoBehaviour
 {
-    private Transform m_MainLevelParent;
+    public static ObstacleReactionController CurrentObj;
+
+    //private Transform m_MainLevelParent;
     private ObjectSocket m_SpawnPointSocket;
     private void Awake()
     {
-        m_MainLevelParent = GameObject.FindGameObjectWithTag($"MainLevelParent").transform;
+        CurrentObj = this;
+
+        //m_MainLevelParent = GameObject.FindGameObjectWithTag($"MainLevelParent").transform;
         m_SpawnPointSocket = GameObject.FindGameObjectWithTag($"PlayerSpawnPoint").GetComponent<ObjectSocket>();
 
         SceneManager.sceneLoaded += SceneLoaded;
     }
     private void SceneLoaded(Scene p_Scene, LoadSceneMode _p_SceneMode)
     {
-        var MLP_Objects = GameObject.FindGameObjectsWithTag($"MainLevelParent");
-        foreach (var MLP_Obj in MLP_Objects)
-        {
-            if (MLP_Obj.scene != p_Scene)
-            {
-                continue;
-            }
-            m_MainLevelParent = MLP_Obj.transform;
-            break;
-        }
+        //var MLP_Objects = GameObject.FindGameObjectsWithTag($"MainLevelParent");
+        //foreach (var MLP_Obj in MLP_Objects)
+        //{
+        //    if (MLP_Obj.scene != p_Scene)
+        //    {
+        //        continue;
+        //    }
+        //    m_MainLevelParent = MLP_Obj.transform;
+        //    break;
+        //}
 
         var SPS_Objects = GameObject.FindGameObjectsWithTag($"PlayerSpawnPoint");
         foreach (var SPS_Obj in SPS_Objects)
@@ -49,7 +53,8 @@ public class ObstacleReactionController : MonoBehaviour
     }
 
 
-
+    [SerializeField]
+    private Transform m_PlayerParentTransform;
     [System.Serializable]
     public struct PlayerReactiveComponents
     {
@@ -66,10 +71,10 @@ public class ObstacleReactionController : MonoBehaviour
     public void SetPlayerStatus_Active()
     {
         m_PlayerReactiveComponents.m_PlayerCollider.enabled = true;
+        m_PlayerReactiveComponents.m_PlayerJumpTarget.ResetVelocity();
         m_PlayerReactiveComponents.m_PlayerJumpTarget.EnableGravity();
         m_PlayerReactiveComponents.m_ObstacleReactionCollider.enabled = true;
         m_PlayerReactiveComponents.m_PlayerControlsComponent.enabled = true;
-        m_PlayerReactiveComponents.m_PlayerTransform.parent = m_MainLevelParent;
     }
     public void SetPlayerStatus_Inactive()
     {
@@ -78,6 +83,27 @@ public class ObstacleReactionController : MonoBehaviour
         m_PlayerReactiveComponents.m_PlayerJumpTarget.ResetVelocity();
         m_PlayerReactiveComponents.m_ObstacleReactionCollider.enabled = false;
         m_PlayerReactiveComponents.m_PlayerControlsComponent.enabled = false;
-        m_PlayerReactiveComponents.m_PlayerTransform.parent = m_MainLevelParent;
+    }
+
+    public void PlacePlayerOnSpawn()
+    {
+        LeanTarget.CompleteRotationReset();
+        SetPlayerStatus_Inactive();
+        if (m_SpawnPointSocket == null)
+        {
+            return;
+        }
+        m_SpawnPointSocket.Stack(m_PlayerReactiveComponents.m_PlayerTransform);
+    }
+    public void PlacePlayerInLevel()
+    {
+        //LeanTarget.CompleteRotationReset();
+        SetPlayerStatus_Active();
+        if (m_SpawnPointSocket == null || m_SpawnPointSocket.AvailableForStack)
+        {
+            return;
+        }
+        m_SpawnPointSocket.RemoveObj().parent = m_PlayerParentTransform;
+        //m_PlayerReactiveComponents.m_PlayerTransform.parent = m_PlayerParentTransform;
     }
 }

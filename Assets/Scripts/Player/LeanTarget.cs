@@ -12,6 +12,14 @@ public class LeanTarget : MonoBehaviour
             return CurrentObjs[0].UpVector;
         }
     }
+    public static void CompleteRotationReset()
+    {
+        foreach(var CO in CurrentObjs)
+        {
+            CO.ResetBaseRotation();
+            CO.ResetRotation();
+        }
+    }
 
     private float[] PossibleRotations = new float[] { 0f, 90f, 180f, 270f };
     private int CurrentRotationIdx = 0;
