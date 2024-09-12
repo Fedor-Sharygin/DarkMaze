@@ -29,4 +29,12 @@ public class ORC_User : MonoBehaviour
     {
         ObstacleReactionController.CurrentObj.PlacePlayerInLevel();
     }
+    public void LoadNextLevel_Complete()
+    {
+        ObstacleReactionController.CurrentObj.LoadNextLevel_Complete();
+    }
+    public void UnloadPreviousLevel()
+    {
+        ObstacleReactionController.CurrentObj.UnloadPreviousLevel();
+    }
 }

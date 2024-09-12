@@ -37,7 +37,12 @@ public class SceneLoader : MonoBehaviour
 
 
 
-    public static void UnloadSceneByIdx(int p_Idx)
+    public static void UnloadPreviousLevel()
+    {
+        //UnloadLevelByIdx((TotalSceneCount + CurrentScene - 1) % TotalSceneCount);
+        UnloadLevelByIdx(CurrentScene);
+    }
+    public static void UnloadLevelByIdx(int p_Idx)
     {
         //UnloadSceneOptions.UnloadAllEmbeddedSceneObjects - USE THIS PARAMETER IF OBJECTS ARE CREATED DURING PLAY
         SceneManager.UnloadSceneAsync(p_Idx);

@@ -139,4 +139,8 @@ public class ObstacleReactionController : MonoBehaviour
         m_OBSM.RemoveBorders();
         SceneLoader.LoadNextLevel();
     }
+    public void UnloadPreviousLevel()
+    {
+        SceneLoader.UnloadPreviousLevel();
+    }
 }
